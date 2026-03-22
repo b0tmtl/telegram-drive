@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
   build-windows:
     runs-on: windows-latest
@@ -23,16 +26,14 @@ jobs:
         run: cd renderer && npm install
 
       - name: Build Windows installer
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run build:win
+        env:
+          ELECTRON_BUILDER_SKIP_PUBLISH: true
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-macos:
     runs-on: macos-latest
@@ -50,15 +51,13 @@ jobs:
       - name: Install renderer dependencies
         run: cd renderer && npm install
 
-      - name: Build macOS installer
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build macOS installers
         run: npm run build:mac
+        env:
+          ELECTRON_BUILDER_SKIP_PUBLISH: true
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             dist/*.dmg
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

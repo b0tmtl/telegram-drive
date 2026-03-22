@@ -26,6 +26,7 @@
   "build": {
     "appId": "com.telegramdrive.app",
     "productName": "Telegram Drive",
+    "publish": "never",
     "files": [
       "main/**/*",
       "renderer/dist/**/*",
