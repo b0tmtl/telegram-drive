@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install root dependencies
         run: npm install
@@ -24,12 +24,6 @@ jobs:
 
       - name: Build Windows installer
         run: npm run build:win
-
-      - name: Upload Windows artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-installer
-          path: dist/*.exe
 
       - name: Release
         uses: softprops/action-gh-release@v2
@@ -46,7 +40,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install root dependencies
         run: npm install
@@ -56,12 +50,6 @@ jobs:
 
       - name: Build macOS installer
         run: npm run build:mac
-
-      - name: Upload macOS artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: macos-installer
-          path: dist/*.dmg
 
       - name: Release
         uses: softprops/action-gh-release@v2
