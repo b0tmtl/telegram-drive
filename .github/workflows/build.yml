@@ -23,9 +23,11 @@ jobs:
         run: cd renderer && npm install
 
       - name: Build Windows installer
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run build:win
 
-      - name: Release
+      - name: Upload to Release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*.exe
@@ -49,11 +51,14 @@ jobs:
         run: cd renderer && npm install
 
       - name: Build macOS installer
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run build:mac
 
-      - name: Release
+      - name: Upload to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.dmg
+          files: |
+            dist/*.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
