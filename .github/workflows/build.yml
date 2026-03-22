@@ -25,8 +25,11 @@ jobs:
       - name: Install renderer dependencies
         run: cd renderer && npm install
 
+      - name: Build renderer
+        run: cd renderer && npm run build
+
       - name: Build Windows installer
-        run: npm run build:renderer && electron-builder --win --publish never
+        run: npx electron-builder --win --publish never
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
@@ -49,8 +52,11 @@ jobs:
       - name: Install renderer dependencies
         run: cd renderer && npm install
 
+      - name: Build renderer
+        run: cd renderer && npm run build
+
       - name: Build macOS installers
-        run: npm run build:renderer && electron-builder --mac --publish never
+        run: npx electron-builder --mac --publish never
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
